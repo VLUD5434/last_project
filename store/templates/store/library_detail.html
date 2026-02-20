@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Інформація про гру{% endblock %}
+
+{% block content %}
+
+<div class="detail-container">
+    <div class="detail-card">
+
+        <img src="{{ game.image.url }}" alt="{{ game.title }}" class="detail-image">
+
+        <div class="detail-info">
+            <h1 class="detail-title">{{ game.title }}</h1>
+
+            <p><b>Жанр:</b> {{ game.get_genre_display }}</p>
+            <p><b>Оцінка:</b> ⭐ {{ game.avg_rating }}</p>
+
+            <h3>Опис гри:</h3>
+            <p class="detail-description">{{ game.description }}</p>
+
+            <hr>
+
+            <h3>Статус</h3>
+
+            <form method="post" class="status-form">
+                {% csrf_token %}
+
+                <select name="status" class="status-select">
+                    <option value="wishlist" {% if lib_game.status == "wishlist" %}selected{% endif %}>Хочу пройти</option>
+                    <option value="playing" {% if lib_game.status == "playing" %}selected{% endif %}>Граю</option>
+                    <option value="completed" {% if lib_game.status == "completed" %}selected{% endif %}>Пройшов</option>
+                </select>
+
+                <button class="save-status-btn">Зберегти</button>
+            </form>
+
+            <a href="{% url 'library' %}" class="back-btn">< Повернутися назад</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

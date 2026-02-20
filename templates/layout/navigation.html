@@ -1,0 +1,23 @@
+<nav class="navbar">
+    <a href="{% url 'home' %}">Головна</a>
+    <a href="/library/">Бібліотека</a>
+
+    <a href="/cart/">
+        Кошик (<span id="cart-counter">{{ cart_count }}</span>)
+    </a>
+
+    <form method="get" action="{% url 'home' %}" class="nav-search">
+        <input type="text" name="q" placeholder="Пошук..." value="{{ request.GET.q }}">
+    </form>
+
+    <div class="nav-right">
+        <a href="{% url 'logout' %}" class="logout-btn">Вийти</a>
+        <button id="theme-toggle" class="theme-switch">
+            {% if request.user.dark_background %}
+                ☀️
+            {% else %}
+                🌙
+            {% endif %}
+        </button>
+    </div>
+</nav>

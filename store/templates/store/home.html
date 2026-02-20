@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/store.css' %}">
+
+<h1 class="page-title">Каталог ігор</h1>
+
+<div class="games-grid">
+    {% for game in page_obj %}
+        <div class="game-card">
+
+            <a href="{% url 'game_detail' game.id %}">
+                <h3 class="game-title">{{ game.title }}</h3>
+            </a>
+
+            <p>Жанр: <strong>{{ game.get_genre_display }}</strong></p>
+            <p>Оцінка: ⭐ {{ game.avg_rating }}</p>
+            <p class="price">{{ game.price }}$</p>
+
+            <button class="buy-btn" onclick="addToCart({{ game.id }})">Купити</button>
+        </div>
+    {% endfor %}
+</div>
+
+{% include 'paginator.html' %}
+
+{% endblock %}

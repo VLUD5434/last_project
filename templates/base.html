@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Головна{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/store.css' %}">
+</head>
+
+<body class="{% if request.user.is_authenticated and request.user.dark_background %}dark{% endif %}">
+
+    <header class="site-header">
+        {% include 'layout/navigation.html' %}
+    </header>
+
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        {% include 'layout/footer.html' %}
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

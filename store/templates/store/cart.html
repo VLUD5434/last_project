@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Кошик{% endblock %}
+
+{% block content %}
+
+<h1 class="cart-title">Ваш кошик</h1>
+
+<div class="cart-container">
+    <div class="cart-items">
+        {% if games %}
+            {% for game in games %}
+                <div class="cart-item-card">
+                    <div class="cart-item-info">
+                        <h2>{{ game.title }}</h2>
+                        <p>Жанр: <b>{{ game.get_genre_display }}</b></p>
+                        <p class="price">{{ game.price }}$</p>
+                    </div>
+
+                    <form action="{% url 'remove_from_cart' game.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="remove-btn">Прибрати</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-cart">Ваш кошик порожній 😢</p>
+        {% endif %}
+    </div>
+
+    <div class="cart-summary">
+        <h2>Загальна вартість:</h2>
+        <p class="total-price">{{ total }}$</p>
+
+        <a href="{% url 'buy_all' %}" class="buy-all-btn">Придбати</a>
+    </div>
+</div>
+
+{% endblock %}

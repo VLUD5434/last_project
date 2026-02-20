@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Бібліотека{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Моя бібліотека</h1>
+
+<div class="library-grid">
+    {% for item in games %}
+        <div class="library-card">
+
+            <h2>
+                <a href="{% url 'library_detail' item.game.id %}">
+                    {{ item.game.title }}
+                </a>
+            </h2>
+
+            <p><b>Жанр:</b> {{ item.game.get_genre_display }}</p>
+            <p><b>Статус:</b> {{ item.get_status_display }}</p>
+
+        </div>
+    {% empty %}
+        <p class="empty-library">Тут будуть ігри, які ви придбаєте 🎮</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

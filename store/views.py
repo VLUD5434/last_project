@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import JsonResponse
 from django.db.models import Q
-from django.contrib.auth import logout
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Game, Cart, Library, LibraryGame
 
@@ -164,7 +164,6 @@ def buy_all(request):
     cart.games.clear()
 
     return redirect("library")
-
 
 
 def library_view(request):

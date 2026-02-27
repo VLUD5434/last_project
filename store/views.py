@@ -115,10 +115,14 @@ def add_to_cart(request, game_id):
     cart, created = Cart.objects.get_or_create(user=request.user)
     cart.games.add(game)
 
-    return JsonResponse({
-        "message": "Added",
-        "cart_count": cart.games.count()
-    })
+    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        return JsonResponse({
+            "message": "added",
+            "cart_count": cart.games.count()
+        })
+
+    return redirect("/")
+
 
 def cart_view(request):
     if not request.user.is_authenticated:

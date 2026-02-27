@@ -19,7 +19,7 @@
             <p>Оцінка: ⭐ {{ game.avg_rating }}</p>
             <p class="price">{{ game.price }}$</p>
 
-            <button class="buy-btn" onclick="addToCart({{ game.id }})">Купити</button>
+            <button type="button" class="buy-btn" onclick="addToCart({{ game.id }})">Купити</button>
         </div>
     {% endfor %}
 </div>

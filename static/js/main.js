@@ -29,6 +29,7 @@ function addToCart(gameId) {
         method: "POST",
         headers: {
             "X-CSRFToken": getCookie("csrftoken"),
+            "X-Requested-With": "XMLHttpRequest"
         },
     })
     .then(r => r.json())
